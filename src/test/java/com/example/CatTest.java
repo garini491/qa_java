@@ -12,20 +12,22 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CatTest {
-    Feline feline = new Feline();
-    Cat cat = new Cat(feline);
+
+
     @Mock
-    private Predator predator;
+    private Feline feline;
 
     @Test
     public void getSoundReturnsCorrectCatSound() {
+        Cat cat = new Cat(feline);
         String expected = "Мяу";
         String actual = cat.getSound();
         assertEquals(expected,actual);
     }
     @Test
     public void getFoodReturnsPredator() throws Exception {
-        Mockito.when(predator.eatMeat()).thenReturn(List.of("Животные", "Птицы", "Рыба"));
+        Cat cat = new Cat(feline);
+        Mockito.when(cat.predator.eatMeat()).thenReturn(List.of("Животные", "Птицы", "Рыба"));
         List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
         List<String> actualFood = cat.getFood();
         assertEquals(expectedFood,actualFood);
